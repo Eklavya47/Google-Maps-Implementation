@@ -23,6 +23,11 @@ android {
         version = release(36)
     }
 
+    buildFeatures {
+        buildConfig = true
+        compose = true
+    }
+
     defaultConfig {
         applicationId = "com.betanooblabs.googlemapsimplementation"
         minSdk = 23
@@ -33,6 +38,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders["googleMapsApiKey"] = mapsKey
+
+        buildConfigField(
+            "String",
+            "Google_Maps_API_Key",
+            "\"$mapsKey\""
+        )
     }
 
     buildTypes {
@@ -50,9 +61,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-    }
-    buildFeatures {
-        compose = true
     }
 }
 
@@ -76,4 +84,6 @@ dependencies {
     implementation(libs.play.services.maps)
     // Jetpack Compose bindings for the Maps SDK
     implementation(libs.maps.compose)
+    // Places and Maps SDKs
+    implementation("com.google.android.libraries.places:places:3.5.0")
 }
